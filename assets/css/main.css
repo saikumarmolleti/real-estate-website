@@ -1,0 +1,688 @@
+/* 1. Variables
+----------------------------------------------------------------------------
+*/
+:root {
+  /*________________________ */
+  --color-primary: #155f5a;
+  --color-primary-dark: #164542;
+  --color-title: #0e393a;
+  --color-text: #afadb5;
+  --color-white: #fff;
+  --color-input: #f8f8f8;
+  --color-border: #ece4de;
+  --bg-linear-gradient: linear-gradient(
+    127.2deg,
+    #155f5a 20.96%,
+    #0e393a 85.82%
+  );
+  /*________________________ */
+  --ff-family: "Open Sans", sans-serif;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semiBold: 600;
+  --fw-bold: 700;
+  /*________________________ */
+  --fs-xs: 1.2rem;
+  --fs-sm: 1.4rem;
+  --fs-md: 1.6rem;
+  --fs-lg: 1.8rem;
+  --fs-xl: 2.4rem;
+  --fs-xxl: 3.2rem;
+  --fs-heading: clamp(3rem, 8vw, 5rem);
+  /*________________________ */
+  --border-radius: 0.5rem;
+  --shadow: 0px 4px 80px 5px rgba(175, 173, 181, 0.2);
+  --transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  /*________________________ */
+  --width-container: 1100px;
+  --height-header: 10rem;
+  --height-header--scroll: 8rem;
+}
+
+/* 2. CSS Reset
+----------------------------------------------------------------------------
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Set the root font-size to 62.5% helps simplify calculations from REM to PX
+    vice-versa 
+    1rem = 10px;
+    */
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+ul,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--color-title);
+  font-weight: var(--fw-bold);
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+body {
+  height: 100vh;
+  font-family: var(--ff-family);
+  font-size: var(--fs-md);
+  margin-top: var(--height-header);
+  color: var(--color-text);
+}
+
+/* 3. Reusable Classes
+----------------------------------------------------------------------------
+*/
+.section {
+  padding: 8rem 0 5rem 0;
+}
+
+.section__header {
+  width: 100%;
+  max-width: 40rem;
+  margin: auto;
+  text-align: center;
+  padding-bottom: 8rem;
+}
+
+.section__title {
+  font-size: var(--fs-xl);
+  margin-bottom: 2rem;
+}
+
+.section__description {
+  font-size: var(--fs-sm);
+}
+
+.grid {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.container {
+  width: 90%;
+  max-width: var(--width-container);
+  margin: auto;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.3rem 4rem;
+  font-weight: var(--fw-semiBold);
+  font-size: var(--fs-sm);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.btn__icon {
+  font-size: 3rem;
+}
+
+.btn--primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.btn--secondary {
+  background-color: var(--color-white);
+  color: var(--color-title);
+}
+
+.btn--secondary:hover {
+  color: var(--color-primary);
+}
+
+.btn--outline {
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn--outline:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* 4. Header section
+----------------------------------------------------------------------------
+*/
+.header {
+  background-color: var(--color-white);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  height: var(--height-header);
+  z-index: 100;
+  transition: var(--transition);
+}
+
+.header--scroll {
+  height: var(--height-header--scroll);
+  box-shadow: var(--shadow);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.nav__brand {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-title);
+}
+
+.nav__open,
+.nav__close {
+  display: none;
+  font-size: 3rem;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.nav__open:hover,
+.nav__close:hover {
+  color: var(--color-primary-dark);
+}
+
+.nav__link {
+  font-weight: var(--fw-semiBold);
+  color: var(--color-title);
+  font-size: var(--fs-sm);
+  transition: var(--transition);
+}
+
+.nav__link:hover {
+  color: var(--color-primary);
+}
+
+.nav__list {
+  display: flex;
+  align-items: center;
+  column-gap: 4rem;
+}
+
+@media screen and (max-width: 968px) {
+  .nav__list {
+    flex-direction: column;
+    row-gap: 3rem;
+  }
+
+  .nav__menu {
+    background-color: var(--color-white);
+    width: 100%;
+    max-width: 30rem;
+    height: 100vh;
+    box-shadow: var(--shadow);
+    position: fixed;
+    top: 0;
+    right: -100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
+    z-index: 999;
+  }
+
+  .nav__menu--open {
+    right: 0;
+  }
+
+  .nav__open,
+  .nav__close {
+    display: block;
+  }
+
+  .nav__close {
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+  }
+}
+
+/* 5. Home section
+----------------------------------------------------------------------------
+*/
+.home__wrapper {
+  min-height: calc(100vh - (var(--height-header)));
+  padding: 8rem 0;
+}
+
+.home__body {
+  width: 100%;
+  max-width: 60rem;
+  justify-self: center;
+  text-align: center;
+}
+
+.home__title {
+  font-size: var(--fs-heading);
+  margin-bottom: 3rem;
+}
+
+.home__description {
+  margin-bottom: 5rem;
+}
+
+.home__link {
+  font-size: var(--fs-md);
+  font-weight: var(--fw-bold);
+  color: var(--color-title);
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 2px solid;
+  margin-bottom: 5rem;
+  transition: var(--transition);
+}
+
+.home__link i {
+  font-size: 2rem;
+  transition: var(--transition);
+}
+
+.home__link:hover {
+  color: var(--color-primary);
+}
+
+.home__link:hover i {
+  margin-left: 1rem;
+}
+
+.home__form {
+  background-color: var(--color-white);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  padding: 4rem 3rem;
+}
+
+.search-form {
+  display: grid;
+  gap: 2rem;
+}
+
+.form__group {
+  position: relative;
+  width: 100%;
+  background-color: var(--color-input);
+  padding: 1.5rem;
+}
+
+.form__input {
+  width: 100%;
+  height: 100%;
+  background-color: inherit;
+  color: var(--color-text);
+  padding-right: 3rem;
+}
+
+.form__input::placeholder {
+  font: inherit;
+  color: inherit;
+}
+
+.form__icon {
+  position: absolute;
+  right: 2rem;
+  font-size: 2rem;
+  color: var(--color-primary);
+}
+
+/* 6. About section
+----------------------------------------------------------------------------
+*/
+.about__body {
+  max-width: 50rem;
+  text-align: center;
+}
+
+.about__title {
+  font-size: var(--fs-xxl);
+  margin-bottom: 2rem;
+}
+
+.about__description {
+  margin-bottom: 5rem;
+}
+
+.about__data {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  margin-bottom: 5rem;
+}
+
+.about__number {
+  font-size: var(--fs-xxl);
+  font-weight: var(--fw-bold);
+  color: var(--color-primary);
+}
+
+.about__info {
+  margin-top: 1rem;
+}
+
+.about__img {
+  justify-self: center;
+  border-radius: var(--border-radius);
+}
+
+/* 7. Services section
+----------------------------------------------------------------------------
+*/
+.service__card {
+  width: 100%;
+  max-width: 30rem;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow);
+  padding: 3rem;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.service__icon {
+  background-color: var(--color-input);
+  display: grid;
+  place-items: center;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  font-size: 3rem;
+  color: var(--color-primary);
+  margin-bottom: 2rem;
+}
+
+.service__title {
+  font-size: var(--fs-lg);
+  margin-bottom: 3rem;
+}
+
+.service__card:hover {
+  background-color: var(--color-primary);
+}
+
+.service__card:hover .service__title,
+.service__card:hover .service__description {
+  color: var(--color-white);
+}
+
+/* 8. Properties section
+----------------------------------------------------------------------------
+*/
+.property__card {
+  width: 100%;
+  max-width: 35rem;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.property__header {
+  width: 100%;
+  overflow: hidden;
+}
+
+.property__img {
+  object-fit: cover;
+  width: 100%;
+}
+
+.property__body {
+  padding: 2rem;
+}
+
+.property__title {
+  font-size: var(--fs-lg);
+  margin-bottom: 2rem;
+}
+
+.property__data {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+}
+
+.property__icon {
+  font-size: 2rem;
+}
+
+.property__info {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+}
+
+.property__footer {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.property__price {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  color: var(--color-title);
+}
+
+/* 9. Download App section
+----------------------------------------------------------------------------
+*/
+
+.download-app {
+  background-image: var(--bg-linear-gradient);
+  margin-bottom: 10rem;
+}
+
+.download-app__title {
+  font-size: var(--fs-xxl);
+  color: var(--color-white);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.download-app__description {
+  color: var(--color-input);
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.download-app__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 5rem;
+}
+
+.download-app__img {
+  justify-self: center;
+  margin-bottom: -15rem;
+  filter: drop-shadow(40px 60px 80px rgba(68, 111, 196, 0.15));
+}
+
+/* 10. Contact section
+----------------------------------------------------------------------------
+*/
+.contact__wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.contact__title {
+  font-size: var(--fs-xxl);
+  margin-bottom: 2rem;
+}
+
+.contact__body {
+  max-width: 40rem;
+  margin-bottom: 3rem;
+}
+
+/* 11. Footer section
+----------------------------------------------------------------------------
+*/
+
+.footer__wrapper {
+  border-top: var(--color-border) 1.5px solid;
+  border-bottom: var(--color-border) 1.5px solid;
+  padding: 5rem 0;
+}
+
+.footer__title {
+  font-size: var(--fs-xl);
+  margin-bottom: 2rem;
+}
+
+.footer__subtitle {
+  font-size: var(--fs-lg);
+  margin-bottom: 2rem;
+}
+
+.footer__item {
+  margin-bottom: 1rem;
+}
+
+.footer__link {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-title);
+  transition: var(--transition);
+}
+
+.footer__link:hover {
+  color: var(--color-primary);
+}
+
+.footer__copyright {
+  text-align: center;
+  padding: 3rem 0;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semiBold);
+}
+
+/* 12. Breakpoints
+----------------------------------------------------------------------------
+*/
+@media screen and (min-width: 768px) {
+  .search-form {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .services__wrapper,
+  .properties__wrapper {
+    grid-template-columns: repeat(2, max-content);
+  }
+
+  .contact__wrapper {
+    flex-direction: initial;
+    justify-content: space-between;
+    text-align: initial;
+  }
+
+  .footer__wrapper {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5rem;
+  }
+}
+
+@media screen and (min-width: 968px) {
+  .search-form {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .about__wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about__data {
+    flex-direction: initial;
+    justify-content: space-between;
+  }
+
+  .about__body {
+    text-align: initial;
+    order: 1;
+  }
+
+  .services__wrapper,
+  .properties__wrapper {
+    grid-template-columns: repeat(3, max-content);
+  }
+
+  .download-app__wrapper {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 5rem 0;
+  }
+
+  .download-app__title,
+  .download-app__description {
+    text-align: initial;
+  }
+
+  .download-app__buttons {
+    justify-content: initial;
+  }
+
+  .footer__wrapper {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    align-items: initial;
+  }
+}
